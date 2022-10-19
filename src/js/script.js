@@ -71,10 +71,6 @@
     menuContainer.appendChild(thisProduct.element);
   };
   const app = {
-    initMenu: function(){
-      const testProduct = new Product();
-      console.log('testProduct:', testProduct);
-    },
     init: function(){
       const thisApp = this;
       console.log('*** App starting ***');
@@ -89,7 +85,7 @@
       const thisApp = this;
       thisApp.data = dataSource;
     }
-    app.initMenu(){
+    initMenu(){
       const thisApp = this;
       console.log('thisApp.data:', thisApp.data);
       for(let productData in thisApp.data.products){
@@ -98,7 +94,4 @@
     
   };
 
-  app.init(){
-    
-    },
-  };
+  app.init();
