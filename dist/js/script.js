@@ -69,7 +69,7 @@
     const menuContainer = document.querySelector(selecr.containerOf.menu);
     /*add element to menu*/
     menuContainer.appendChild(thisProduct.element);
-  };
+  }
   const app = {
     initMenu: function(){
       const testProduct = new Product();
@@ -85,22 +85,23 @@
       thisApp.initData();
       thisApp.initMenu();
     },
-    initData : function(){
-      const thisApp = this;
-
-      thisApp.data = dataSource;
-    }
   };
+  initData : function(){
+    const thisApp = this;
 
-  app.init(){
-    app.initData(){
+    thisApp.data = dataSource;
+  },
+
+  const app.init(){
+    const app.initData(){
 
     },
-    app.initMenu(){
+    const app.initMenu(){
       const thisApp = this;
       console.log('thisApp.data:', thisApp.data);
       for(let productData in thisApp.data.products){
         new Product(productData, thisApp.data.products[productData]);
       },
     },
-  };
+};
+generate app();
