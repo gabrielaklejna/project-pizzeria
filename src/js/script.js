@@ -75,7 +75,7 @@
       const testProduct = new Product();
       console.log('testProduct:', testProduct);
     },
-    app.init: function(){
+    init: function(){
       const thisApp = this;
       console.log('*** App starting ***');
       console.log('thisApp:', thisApp);
@@ -87,20 +87,18 @@
     },
     initData : function(){
       const thisApp = this;
-
       thisApp.data = dataSource;
     }
-  };
-
-  app.init(){
-    app.initData(){
-
-    },
     app.initMenu(){
       const thisApp = this;
       console.log('thisApp.data:', thisApp.data);
       for(let productData in thisApp.data.products){
         new Product(productData, thisApp.data.products[productData]);
       },
+    
+  };
+
+  app.init(){
+    
     },
   };
