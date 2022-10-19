@@ -81,17 +81,16 @@
       thisApp.initData();
       thisApp.initMenu();
     },
-    initData : function(){
+    initData: function(){
       const thisApp = this;
       thisApp.data = dataSource;
-    }
-    initMenu(){
+    },
+    initMenu: function(){
       const thisApp = this;
       console.log('thisApp.data:', thisApp.data);
       for(let productData in thisApp.data.products){
         new Product(productData, thisApp.data.products[productData]);
       },
-    
   };
 
   app.init();
