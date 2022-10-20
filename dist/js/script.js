@@ -1,5 +1,4 @@
 /* global Handlebars, utils, dataSource */ // eslint-disable-line no-unused-vars
-
 {
   'use strict';
 
@@ -51,31 +50,29 @@
   const templates = {
     menuProduct: Handlebars.compile(document.querySelector(select.templateOf.menuProduct).innerHTML),
   };
-  const thisProduct.id = id; 
-  const thisProduct.data = data;
+
   class Product{
     constructor(id, data){
       const thisProduct = this;
-      console.log('new Product:' thisProduct)
+      thisProduct.id = id; 
+      thisProduct.data = data;
+      thisProduct.renderInMenu();
     }  
-  };
-  renderInMenu(){
-    const thisProduct = this; 
-    /*generate HTML based on template*/
-    const generatedHTML = templates.menuProduct(thisProduct.data);
-    /*create element using utilscreateElementFromHTML*/
-    thisProduct.element = utils.createDOMFromHTML(generatedHTML);
-    /*find menu container*/
-    const menuContainer = document.querySelector(selecr.containerOf.menu);
-    /*add element to menu*/
-    menuContainer.appendChild(thisProduct.element);
+    renderInMenu(){
+      const thisProduct = this; 
+      /*generate HTML based on template*/
+      const generatedHTML = templates.menuProduct(thisProduct.data);
+      /*create element using utilscreateElementFromHTML*/
+      thisProduct.element = utils.createDOMFromHTML(generatedHTML);
+      /*find menu container*/
+      const menuContainer = document.querySelector(select.containerOf.menu);
+      /*add element to menu*/
+      menuContainer.appendChild(thisProduct.element);
+    };
   }
+ 
   const app = {
-    initMenu: function(){
-      const testProduct = new Product();
-      console.log('testProduct:', testProduct);
-    },
-    app.init: function(){
+    init: function(){
       const thisApp = this;
       console.log('*** App starting ***');
       console.log('thisApp:', thisApp);
@@ -85,23 +82,18 @@
       thisApp.initData();
       thisApp.initMenu();
     },
-  };
-  initData : function(){
-    const thisApp = this;
-
-    thisApp.data = dataSource;
-  },
-
-  const app.init(){
-    const app.initData(){
-
+    initData: function(){
+      const thisApp = this;
+      thisApp.data = dataSource;
     },
-    const app.initMenu(){
+    initMenu: function(){
       const thisApp = this;
       console.log('thisApp.data:', thisApp.data);
       for(let productData in thisApp.data.products){
         new Product(productData, thisApp.data.products[productData]);
-      },
-    },
-};
-generate app();
+      }
+    }
+  }
+
+  app.init();
+}

@@ -1,5 +1,4 @@
 /* global Handlebars, utils, dataSource */ // eslint-disable-line no-unused-vars
-
 {
   'use strict';
 
@@ -51,25 +50,27 @@
   const templates = {
     menuProduct: Handlebars.compile(document.querySelector(select.templateOf.menuProduct).innerHTML),
   };
-  const thisProduct.id = id; 
-  const thisProduct.data = data;
+
   class Product{
     constructor(id, data){
       const thisProduct = this;
-      console.log('new Product:' thisProduct)
+      thisProduct.id = id; 
+      thisProduct.data = data;
+      thisProduct.renderInMenu();
     }  
-  };
-  renderInMenu(){
-    const thisProduct = this; 
-    /*generate HTML based on template*/
-    const generatedHTML = templates.menuProduct(thisProduct.data);
-    /*create element using utilscreateElementFromHTML*/
-    thisProduct.element = utils.createDOMFromHTML(generatedHTML);
-    /*find menu container*/
-    const menuContainer = document.querySelector(selecr.containerOf.menu);
-    /*add element to menu*/
-    menuContainer.appendChild(thisProduct.element);
-  };
+    renderInMenu(){
+      const thisProduct = this; 
+      /*generate HTML based on template*/
+      const generatedHTML = templates.menuProduct(thisProduct.data);
+      /*create element using utilscreateElementFromHTML*/
+      thisProduct.element = utils.createDOMFromHTML(generatedHTML);
+      /*find menu container*/
+      const menuContainer = document.querySelector(select.containerOf.menu);
+      /*add element to menu*/
+      menuContainer.appendChild(thisProduct.element);
+    };
+  }
+ 
   const app = {
     init: function(){
       const thisApp = this;
@@ -90,7 +91,9 @@
       console.log('thisApp.data:', thisApp.data);
       for(let productData in thisApp.data.products){
         new Product(productData, thisApp.data.products[productData]);
-      },
-  };
+      }
+    }
+  }
 
   app.init();
+}
