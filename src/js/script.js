@@ -60,7 +60,7 @@
       thisProduct.initAccordion();
       thisProduct.getElements();
       thisProduct.initOrderForm();
-      thisProduct.amountWidgetElem
+      thisProduct.initAmountWidget();
     }  
 
     renderInMenu(){
@@ -165,7 +165,62 @@
       thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
       thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
+      thisProduct.amountWidgetElem = thisProduct.element.querySelector(select.menuProduct.amountWidget);
     }
+
+    initAmountWidget(){
+      const thisProduct = this;
+      thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
+    }
+  }
+
+  class AmountWidget{ 
+    constructor(element){
+      const thisWidget = this; 
+      thisWidget.getElements(element);
+      thisWidget.initActions();
+      thisWidget.setValue(thisWidget.input.value || settings.amountWidget.defaultValue);
+    }
+    getElements(element){
+      const thisWidget = this;
+      thisWidget.element = element;
+      thisWidget.input = thisWidget.element.querySelector(select.widgets.amount.input);
+      thisWidget.linkDecrease = thisWidget.element.querySelector(select.widgets.amount.linkDecrease);
+      thisWidget.linkIncrease = thisWidget.element.querySelector(select.widgets.amount.linkIncrease);
+    }
+   
+    initActions() {
+      const thisWidget = this;
+
+      thisWidget.input.addEventListener('change', function(e) {
+        e.preventDefault();
+        thisWidget.setValue(e.target.value);
+      });
+
+      thisWidget.linkIncrease.addEventListener('click', function(e) {
+        e.preventDefault();
+        thisWidget.setValue(thisWidget.value + 1);
+      });
+
+      thisWidget.linkDecrease.addEventListener('click', function(e) {
+        e.preventDefault();
+        thisWidget.setValue(thisWidget.value - 1);
+      });
+    }
+
+
+    setValue(value){
+      const thisWidget = this;
+
+      const newValue = parseInt(value);
+  
+      if(thisWidget.value !== newValue && !isNaN(newValue) && newValue >= settings.amountWidget.defaultMin && newValue <= settings.amountWidget.defaultMax) {
+        thisWidget.value = newValue;
+      }
+      
+      thisWidget.input.value = thisWidget.value;
+    }
+    
   }
  
   const app = {
@@ -197,37 +252,6 @@
   };
   
   app.init();
-}
-
-class AmountWidget{ 
-  constructor(element){
-    const thisWidget = this; 
-    thisWidget.getElements(element);
-  }
-  getElements(element){
-    const thisWidget = this;
-    thisWidget.element = element;
-    thisWidget.input = thisWidget.element.querySelector(select.widgets.amount.input);
-    thisWidget.linkDecrease = thisWidget.element.querySelector(select.widgets.amount.linkDecrease);
-    thisWidget.linkIncrease = thisWidget.element.querySelector(select.widgets.amount.linkIncrease);
-  }
-  initAmountWidget(){
-    const thisProduct = this;
-    thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
-  }
-  setValue(value){
-    const this Widget = this;
-    const newValue = parseInt(value);
-
-    thisWidget.value = newValue;
-    thisWidget.input.value = thisWidget.value;
-     
-    if(thisWidget.value !== newValue) {
-      thisWidget.value = newValue;
-    }
-    settings.amountWidget.defaultValue
-  }
   
-
-
 }
+

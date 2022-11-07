@@ -60,6 +60,7 @@
       thisProduct.initAccordion();
       thisProduct.getElements();
       thisProduct.initOrderForm();
+      thisProduct.amountWidgetElem
     }  
 
     renderInMenu(){
@@ -191,7 +192,42 @@
         new Product(productData, thisApp.data.products[productData]);
       }
     }
-  };
 
+    
+  };
+  
   app.init();
+}
+
+class AmountWidget{ 
+  constructor(element){
+    const thisWidget = this; 
+    thisWidget.getElements(element);
+  }
+  getElements(element){
+    const thisWidget = this;
+    thisWidget.element = element;
+    thisWidget.input = thisWidget.element.querySelector(select.widgets.amount.input);
+    thisWidget.linkDecrease = thisWidget.element.querySelector(select.widgets.amount.linkDecrease);
+    thisWidget.linkIncrease = thisWidget.element.querySelector(select.widgets.amount.linkIncrease);
+  }
+  initAmountWidget(){
+    const thisProduct = this;
+    thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
+  }
+  setValue(value){
+    const this Widget = this;
+    const newValue = parseInt(value);
+
+    thisWidget.value = newValue;
+    thisWidget.input.value = thisWidget.value;
+     
+    if(thisWidget.value !== newValue) {
+      thisWidget.value = newValue;
+    }
+    settings.amountWidget.defaultValue
+  }
+  
+
+
 }
