@@ -285,7 +285,7 @@
     initActions(){
       const thisCart = this;
       thisCart = thisCart.dom.toggleTrigger.addEventListener('click', function (e){
-    }
+    })
 
     /*add(menuProduct){
       //const thisCart = this;
