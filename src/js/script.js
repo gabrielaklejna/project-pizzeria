@@ -216,6 +216,7 @@
     addToCart(){
       const thisProduct = this;
       app.cart.add(thisProduct.prepareCartProduct());
+      
     }
 
     prepareCartProduct(){
@@ -266,6 +267,8 @@
       thisWidget.getElements(element);
       thisWidget.initActions();
       thisWidget.setValue(thisWidget.input.value || settings.amountWidget.defaultValue);
+
+      
     }
     getElements(element){
       const thisWidget = this;
@@ -377,7 +380,23 @@
       //const thisCart = this;
       console.log('adding product', menuProduct);
     }
+    remove(){
+      const thisCartProduct = this; 
+      const event = new CustomEvent ('remove', {
+        bubbles: true,
+        detail: {
+          cartProduct: thisCartProduct,
+        },
+      });
+      thisCartProduct.dom.wrapper.dispatchEvent(event);
+    }
   }
-
+  class CartProduct{ 
+    constructor(menuProduct, element){
+      const thisCartProduct = this;
+      thisCartProduct.id = id;
+      menuProduct.id = 
+    }
+  }
   app.init();
 }
