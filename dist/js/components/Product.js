@@ -1,3 +1,5 @@
+import utils from '../utils.js';
+import { templates, select} from '../settings.js';
 class Product{
     constructor(id, data){
       const thisProduct = this;
@@ -128,8 +130,14 @@ class Product{
 
     addToCart(){
       const thisProduct = this;
-      app.cart.add(thisProduct.prepareCartProduct());
+      //app.cart.add(thisProduct.prepareCartProduct());
       
+      const event =new CustomEvent('add-to-cart',{
+        bubbles: true,
+        detail: 
+      });
+
+
     }
 
     prepareCartProduct(){
