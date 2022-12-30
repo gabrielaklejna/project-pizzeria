@@ -134,11 +134,11 @@ class Product{
       
       const event =new CustomEvent('add-to-cart',{
         bubbles: true,
-        detail: {
-          product: thisProduct
-        }
+        detail: thisProduct.prepareCartProduct()
       });
+
       thisProduct.element.dispatchEvent(event);
+
     }
 
     prepareCartProduct(){
