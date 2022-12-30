@@ -35,7 +35,7 @@ export const select = {
       },
       hourPicker:{
         wrapper: '.hour-picker',
-        input: 'input[type="range"]'
+        input: 'input[type="range"]',
         output: '.output',
       }
     },
@@ -78,6 +78,12 @@ export const classNames = {
     cart: {
       wrapperActive: 'active',
     },
+    pages: {
+      active: 'active'
+    },
+    nav: {
+      active: 'active'
+    },
     // CODE ADDED END
   };
   
@@ -106,12 +112,12 @@ export const settings = {
       url: '//localhost:3131',
       products: 'products',
       orders: 'orders',
-      booking: 'booking',
-      event: 'event',
-      dateStartParamKey: 'date_gte',
-      dateEndParamKey: 'date_lte',
-      notRepeatParam: 'repeat=false',
-      repeatParam: 'repeat_ne=false',
+      bookings: 'bookings',
+      events: 'events',
+      dateStartParamsKey: 'date_gte',
+      dateEndParamsKey: 'date_lte',
+      notRepeatParams: 'repeat=false',
+      repeatParams: 'repeat_ne=false',
     },
   };
   

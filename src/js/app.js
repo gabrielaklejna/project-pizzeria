@@ -24,11 +24,6 @@ import Cart from './components/Cart.js';
           thisApp.activedPage(id);
         });
       }
-
-      
-
-
-
     },
     activedPage: function(pageId){
       const thisApp = this;
@@ -85,7 +80,7 @@ import Cart from './components/Cart.js';
       thisApp.productList=document.querySelector(select.containerOf.menu);
 
       thisApp.productList.addEventListener('add-to-cart', function(event){
-        app.cart.add(event.detail.product)
+        app.cart.add(event.detail)
       });
 
     },

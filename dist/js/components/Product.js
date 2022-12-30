@@ -1,5 +1,6 @@
 import utils from '../utils.js';
 import { templates, select} from '../settings.js';
+import AmountWidget from './AmountWidget.js';
 class Product{
     constructor(id, data){
       const thisProduct = this;
