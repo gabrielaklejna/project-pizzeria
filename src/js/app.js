@@ -1,7 +1,7 @@
 /* global Handlebars, utils, dataSource */ // eslint-disable-line no-unused-vars
 import {settings, select, classNames, templates} from './settings.js';
 import Product from './components/Product.js';
-import Cart from '.components/Cart.js';
+import Cart from './components/Cart.js';
 
 
   const app = {
@@ -43,6 +43,7 @@ import Cart from '.components/Cart.js';
       const thisApp = this; 
       const cartElem = document.querySelector(select.containerOf.cart);
       thisApp.cart = new Cart(cartElem);
+      thisApp.productList=document.querySelector();
     },
   }
 
