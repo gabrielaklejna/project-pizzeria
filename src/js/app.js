@@ -2,6 +2,7 @@
 import {settings, select, classNames, templates} from './settings.js';
 import Product from './components/Product.js';
 import Cart from './components/Cart.js';
+/*import Booking from './components/Booking.js';*/
 
 
   const app = {
@@ -32,7 +33,7 @@ import Cart from './components/Cart.js';
         page.classList.toggle(classNames.pages.active, page.id==pageId )
       }
       /* add class "active" to matching links, remove from non-matching */
-      for(let links of thisApp.navLinks){
+      for(let link of thisApp.navLinks){
         link.classList.toggle(classNames.nav.active, link.getAttribute('href') == '#' + pageId);
       };
     },
@@ -47,6 +48,7 @@ import Cart from './components/Cart.js';
       thisApp.initData();
       thisApp.initCart();
       thisApp.initPages();
+      thisApp.initBooking(); 
     },
 
     initData: function(){
@@ -84,8 +86,14 @@ import Cart from './components/Cart.js';
       });
 
     },
+   /* initBooking: function(){
+      const thisApp = this; 
+      const bookingElem = element.querySelector(select.containerOf.booking);
+      thisApp.booking = new Booking(bookingElem);
+    }*/
   }
 
   app.init();
+  
 
 

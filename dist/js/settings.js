@@ -45,7 +45,7 @@ export const select = {
       tables: '.floor-plan .table',
     },
     nav: {
-      links: '.main-nav a',
+      links: '.main-nav',
     },
     // CODE ADDED START
     cart: {
