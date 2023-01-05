@@ -1,4 +1,4 @@
-/*import {select, templates} from '../settings.js';
+import {select, templates} from '../settings.js';
 import utils from '../utils.js';
 import AmountWidget from './AmountWidget.js';
 class Booking{
@@ -23,4 +23,4 @@ class Booking{
     };
     initWidgets();
 }
-export default Booking */
+export default Booking 
