@@ -5,33 +5,27 @@ class Booking{
     constructor(element){
         const thisBooking = this;
 
+        thisBooking.render(element);
+        thisBooking.initWidgets();
     }
-    getElements(element){
-        const thisBooking = this;
-
-       
-    }
-    render(){
-        const thisBooking = this; 
-        const generatedHTML = templates.bookingWidget(thisBooking.data);
+  
+    render(element){
+      const thisBooking = this; 
+      const generatedHTML = templates.bookingWidget(thisBooking.data);
         thisBooking.element = utils.createDOMFromHTML(generatedHTML);
+        element.appendChild(thisBooking.element);
         thisBooking.dom = {};
-        thisBooking.dom.wrapper = element;
-        thisBooking.dom.booking = element.querySelector(select.containerOf.booking);
-        thisBooking.dom.wrapper.innerHTML = thisBooking.wrapper;
-        thisBooking.dom.peopleAmount = element.querySelector(select.booking.peopleAmount);
-        thisBooking.dom.hoursAmount = element.querySelector(select.booking.hoursAmount);
-    };
+        thisBooking.dom.wrapper = thisBooking.element;
+        thisBooking.dom.peopleAmount = thisBooking.dom.wrapper.querySelector(select.booking.peopleAmount);
+        thisBooking.dom.hoursAmount = thisBooking.dom.wrapper.querySelector(select.booking.hoursAmount);
+    }
     initWidgets(){
         const thisBooking = this;
       
-        thisBooking.amountWidget = new AmountWidget(thisBooking.dom.amountWidgetElem);
-        thisBooking.dom.amountWidgetElem.addEventListener('updated', function(e) {
-            e.preventDefault();
+        thisBooking.peopleAmount = new AmountWidget(thisBooking.dom.peopleAmount);
+        thisBooking.hoursAmount = new AmountWidget(thisBooking.dom.hoursAmount);
       
-            thisBooking.amount = thisCartProduct.amountWidget.value;
-            thisBooking.dom.amount.innerHTML = thisBooking.amount;
-        });
-    };
-}
+        };
+    
+};
 export default Booking 

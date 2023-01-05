@@ -87,11 +87,8 @@ import Booking from './components/Booking.js';
     },
     initBooking: function(){
       const thisApp = this; 
-      const bookingElem = element.querySelector(select.containerOf.booking);
+      const bookingElem = document.querySelector(select.containerOf.booking);
       thisApp.booking = new Booking(bookingElem);
-
-
-
     }
   }
 
