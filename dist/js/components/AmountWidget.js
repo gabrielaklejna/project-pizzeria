@@ -1,4 +1,4 @@
-import { settings,select} from '../settings.js';
+import {settings, select} from '../settings.js';
 import BaseWidget from './BaseWidget.js';
 
 class AmountWidget extends BaseWidget{ 
@@ -8,9 +8,8 @@ class AmountWidget extends BaseWidget{
       const thisWidget = this; 
 
       thisWidget.getElements(element);
-      thisWidget.initActions();
-      thisWidget.setValue(thisWidget.input.value || settings.amountWidget.defaultValue);
  
+      thisWidget.initActions();
     }
     getElements(element){
       const thisWidget = this;
@@ -19,7 +18,6 @@ class AmountWidget extends BaseWidget{
       thisWidget.dom.linkDecrease = thisWidget.dom.wrapper.querySelector(select.widgets.amount.linkDecrease);
       thisWidget.dom.linkIncrease = thisWidget.dom.wrapper.querySelector(select.widgets.amount.linkIncrease);
     }
-   
     initActions() {
       const thisWidget = this;
 
@@ -38,6 +36,7 @@ class AmountWidget extends BaseWidget{
         thisWidget.setValue(thisWidget.value - 1);
       });
     }
+   
     isValid(value){
       return !isNaN(value) 
       && value >= settings.amountWidget.defaultMin 
