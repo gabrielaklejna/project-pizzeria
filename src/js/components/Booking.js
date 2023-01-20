@@ -79,6 +79,8 @@ class Booking{
             thisBooking.makeBooked(item.date, item.hour, item.duration, item.table,);
         }
       }
-      makeBooked(date, hour, duration, table){}
+      makeBooked(date, hour, duration, table){
+        const thisBooking = this; 
+      }
 };
 export default Booking 
