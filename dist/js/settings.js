@@ -103,7 +103,7 @@ export const settings = {
       closed: 24,
     },
     datePicker: {
-      maXdaysInFuture: 14,
+      maxDaysInFuture: 14,
     },
     booking: {
       tableIdAttribute: 'data-table',

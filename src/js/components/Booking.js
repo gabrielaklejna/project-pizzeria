@@ -1,4 +1,4 @@
-import {select, templates} from '../settings.js';
+import {select, templates, settings} from '../settings.js';
 import utils from '../utils.js';
 import AmountWidget from './AmountWidget.js';
 import DatePicker from './DatePicker.js';
@@ -34,17 +34,17 @@ class Booking{
       };
       getData(){
         const thisBooking = this; 
-        const startDateParam = settings.db.dateStartParamKey + '=' + utils.dateToStr(thisBooking.datePicker.minDate);
-        const endDateParam = settings.db.dateStartParamKey + '=' + utils.dateToStr(thisBooking.datePicker.maxDate);
+        const startDateParam = settings.db.dateStartParamsKey + '=' + utils.dateToStr(thisBooking.datePicker.minDate);
+        const endDateParam = settings.db.dateStartParamsKey + '=' + utils.dateToStr(thisBooking.datePicker.maxDate);
         const params = {
-            booking: [
+            bookings: [
                 startDateParam, endDateParam,
             ],
             eventsCurrent:[
                 settings.db.notRepeatParam, startDateParam, endDateParam,   
             ],
             eventsRepeat: [
-                setting.db.repeatParam, endDateParam,
+                settings.db.repeatParam, endDateParam,
             ],
         };
         const urls = {
@@ -57,7 +57,7 @@ class Booking{
           fetch(urls.eventsCurrent),
           fetch(urls.eventsRepeat),
         ])
-          .then(function(bookingsResponse){
+          .then(function(allResponses){
             const bookingsResponse = allResponses[0];
             const eventsCurrentResponse = allResponses[1];
             const eventsRepeatResponse = allResponses[2];
@@ -67,14 +67,14 @@ class Booking{
                 eventsRepeatResponse.json(),
             ]);
           })
-          .then(function([bookings,eventsCurrent, eventsRepeat]){
-            thisBooking.parseData(bookings, eventCurrent, eventRepeat);
+          .then(function([bookings, eventsCurrent, eventsRepeat]){
+            thisBooking.parseData(bookings, eventsCurrent, eventsRepeat);
             });
       }
       parseData(bookings, eventsCurrent, eventsRepeat){
         const thisBooking = this; 
 
-        thisCooking.booked = {};
+        thisBooking.booked = {};
         for ( let item of eventsCurrent){
             thisBooking.makeBooked(item.date, item.hour, item.duration, item.table,);
         }
