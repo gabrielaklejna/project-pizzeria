@@ -9,6 +9,7 @@ class Booking{
 
         thisBooking.render(element);
         thisBooking.initWidgets();
+        thisBooking.getData();
     }
   
     render(element){
@@ -31,5 +32,53 @@ class Booking{
           thisBooking.datePicker = new DatePicker(thisBooking.dom.datePicker);
           thisBooking.hourPicker = new HourPicker(thisBooking.dom.hourPicker);
       };
+      getData(){
+        const thisBooking = this; 
+        const startDateParam = settings.db.dateStartParamKey + '=' + utils.dateToStr(thisBooking.datePicker.minDate);
+        const endDateParam = settings.db.dateStartParamKey + '=' + utils.dateToStr(thisBooking.datePicker.maxDate);
+        const params = {
+            booking: [
+                startDateParam, endDateParam,
+            ],
+            eventsCurrent:[
+                settings.db.notRepeatParam, startDateParam, endDateParam,   
+            ],
+            eventsRepeat: [
+                setting.db.repeatParam, endDateParam,
+            ],
+        };
+        const urls = {
+            booking: settings.db.url + '/' + settings.db.bookings + '?' + params.bookings.join('&'),
+            eventsCurrent: settings.db.url + '/' + settings.db.events + '?' + params.eventsCurrent.join('&'), 
+            eventsRepeat: settings.db.url + '/' + settings.db.events+ '?' + params.eventsRepeat.join('&'),
+        };
+        Promise.all([
+          fetch(urls.booking),
+          fetch(urls.eventsCurrent),
+          fetch(urls.eventsRepeat),
+        ])
+          .then(function(bookingsResponse){
+            const bookingsResponse = allResponses[0];
+            const eventsCurrentResponse = allResponses[1];
+            const eventsRepeatResponse = allResponses[2];
+            return Promise.all([
+                bookingsResponse.json(),
+                eventsCurrentResponse.json(),
+                eventsRepeatResponse.json(),
+            ]);
+          })
+          .then(function([bookings,eventsCurrent, eventsRepeat]){
+            thisBooking.parseData(bookings, eventCurrent, eventRepeat);
+            });
+      }
+      parseData(bookings, eventsCurrent, eventsRepeat){
+        const thisBooking = this; 
+
+        thisCooking.booked = {};
+        for ( let item of eventsCurrent){
+            thisBooking.makeBooked(item.date, item.hour, item.duration, item.table,);
+        }
+      }
+      makeBooked(date, hour, duration, table){}
 };
 export default Booking 
