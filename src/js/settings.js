@@ -84,6 +84,9 @@ export const classNames = {
     nav: {
       active: 'active'
     },
+    booking: {
+      tableBooked: 'booked'
+    },
     // CODE ADDED END
   };
   
