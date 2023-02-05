@@ -10,6 +10,8 @@ class Booking{
         thisBooking.render(element);
         thisBooking.initWidgets();
         thisBooking.getData();
+
+        thisBooking.tableSelected = null;
     }
   
     render(element){
@@ -24,6 +26,7 @@ class Booking{
           thisBooking.dom.datePicker = thisBooking.dom.wrapper.querySelector(select.widgets.datePicker.wrapper);
           thisBooking.dom.hourPicker = thisBooking.dom.wrapper.querySelector(select.widgets.hourPicker.wrapper);
           thisBooking.dom.tables = thisBooking.dom.wrapper.querySelectorAll(select.booking.tables);
+          thisBooking.dom.floorPlan = thisBooking.dom.wrapper.querySelector(select.booking.floorPlan);
       }
       initWidgets(){
           const thisBooking = this;
@@ -36,7 +39,37 @@ class Booking{
             thisBooking.updateDOM();
           });
 
-      };
+          thisBooking.dom.floorPlan.addEventListener('click', function(event) {
+            event.preventDefault();
+            if(event.target.classList.contains(classNames.booking.table)){
+              thisBooking.handleTableClick(event.target);
+            }
+          });
+      }
+
+      handleTableClick(table){
+        const thisBooking = this;
+        const tableId = table.getAttribute(settings.booking.tableIdAttribute);
+
+        if(table.classList.contains(classNames.booking.booked)) {
+          alert("stolik zajęty");
+          return;
+        }
+
+        if (thisBooking.tableSelected && thisBooking.tableSelected != tableId) {
+          const activeTable = thisBooking.dom.floorPlan.querySelector(select.booking.tableSelected);
+          activeTable.classList.remove(classNames.booking.tableSelected);
+        }
+
+        table.classList.toggle(classNames.booking.tableSelected);
+        if (thisBooking.tableSelected !== tableId) {
+          thisBooking.tableSelected = tableId;
+        }
+        else {
+          thisBooking.tableSelected = null;
+        }
+      }
+
       getData(){
         const thisBooking = this; 
         const startDateParam = settings.db.dateStartParamsKey + '=' + utils.dateToStr(thisBooking.datePicker.minDate);
@@ -150,16 +183,7 @@ class Booking{
           }
         }
       }
-      bookTable(){
-        const thisBooking = this; 
 
-        thisBooking.dom.wrapper.addEventListener('dblclick', function(event) {
-          event.preventDefault();
-          if(event.target.tagName === 'IMG') {
-            const tableBooked = event.target.offsetParent;
-            const dataId = parseInt(bookCover.getAttribute('data-id'));
-          }
-        }
-      }
+
 };
 export default Booking;
