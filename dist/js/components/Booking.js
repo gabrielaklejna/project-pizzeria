@@ -45,6 +45,13 @@ class Booking{
               thisBooking.handleTableClick(event.target);
             }
           });
+          
+          thisBooking.dom.wrapper.addEventListener('submit', function (e){
+            e.preventDefault();
+            thisBooking.sendBooking();
+          });
+
+        
       }
 
       handleTableClick(table){
@@ -182,6 +189,33 @@ class Booking{
             table.classList.remove(classNames.booking.tableBooked);
           }
         }
+      }
+      sendBooking() {
+        const thisBooking = this;
+  
+        const url = settings.db.url + '/' + settings.db.bookings; //http://localhost:3131/bookings
+        const payload = {
+          date: thisBooking.date,
+          hour: thisBooking.hourPicker,
+          table: thisBooking.tableSelected,
+          duration: thisBooking.hoursAmount,
+          ppl: thisBooking.peopleAmount.value,
+          starters: [],
+          phone: thisBooking.phone,
+          address: thisBooking.address,
+        }
+  
+        for(const starter of payload.starters) {
+          payload.starters.push(starter.getData());
+        }
+  
+        fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(payload)
+        })
       }
 
 
