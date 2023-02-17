@@ -27,6 +27,10 @@ class Booking{
           thisBooking.dom.hourPicker = thisBooking.dom.wrapper.querySelector(select.widgets.hourPicker.wrapper);
           thisBooking.dom.tables = thisBooking.dom.wrapper.querySelectorAll(select.booking.tables);
           thisBooking.dom.floorPlan = thisBooking.dom.wrapper.querySelector(select.booking.floorPlan);
+          thisBooking.dom.starters = thisBooking.dom.wrapper.querySelectorAll(select.booking.starters);
+          thisBooking.dom.phone = thisBooking.dom.wrapper.querySelector(select.booking.phone);
+          thisBooking.dom.address = thisBooking.dom.wrapper.querySelector(select.booking.address);
+
       }
       initWidgets(){
           const thisBooking = this;
@@ -115,6 +119,7 @@ class Booking{
           .then(function([bookings, eventsCurrent, eventsRepeat]){
             thisBooking.parseData(bookings, eventsCurrent, eventsRepeat);
             });
+
       }
       parseData(bookings, eventsCurrent, eventsRepeat){
         const thisBooking = this; 
@@ -195,18 +200,20 @@ class Booking{
   
         const url = settings.db.url + '/' + settings.db.bookings; //http://localhost:3131/bookings
         const payload = {
-          date: thisBooking.date,
-          hour: thisBooking.hourPicker,
+          date: thisBooking.datePicker.value,
+          hour: thisBooking.hourPicker.value,
           table: thisBooking.tableSelected,
-          duration: thisBooking.hoursAmount,
+          duration: thisBooking.hoursAmount.value,
           ppl: thisBooking.peopleAmount.value,
           starters: [],
-          phone: thisBooking.phone,
-          address: thisBooking.address,
+          phone: thisBooking.dom.phone.value,
+          address: thisBooking.dom.address.value,
         }
   
-        for(const starter of payload.starters) {
-          payload.starters.push(starter.getData());
+        for(const starter of thisBooking.dom.starters) {
+          if (starter.checked === true){
+            payload.starters.push(starter.value);
+          }
         }
   
         fetch(url, {

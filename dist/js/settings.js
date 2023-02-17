@@ -45,6 +45,10 @@ export const select = {
       tables: '.floor-plan .table',
       floorPlan: '.floor-plan',
       tableSelected: '.table.selected',
+      starters: 'input[name="starter"]',
+      phone: 'input[name="phone"]',
+      address: 'input[name="address"]',
+      
     },
     nav: {
       links: '.main-nav',

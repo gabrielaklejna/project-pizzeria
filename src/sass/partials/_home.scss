@@ -1,0 +1,71 @@
+*, *::before, *::after{
+    box-sizing: border-box;
+  }
+.col-6{
+    img{ 
+        width:400px; 
+        height: 200px;
+    }
+}
+span{
+    color: white;  
+    text-align: center; 
+    display: inline-block;
+}
+
+.col-12{ 
+    text-align: center;
+    color: white;
+    background: tomato; 
+    height: 150px;
+    margin-left: -18%;
+    margin-right: -18%;
+    padding-top: 5%;
+}
+.main-carousel{
+    margin-left:26%;
+    margin-right:26%;
+    margin-top: 10%;
+    text-align: center;
+    .carousel-cell{
+        img{
+            width:400px;
+            height:200px;
+        }
+        .text{
+            float: right;
+            width: 490px;
+        }
+    }
+}
+
+.gallery{
+    justify-content: space-between;
+    flex-wrap: wrap; 
+    position: relative;
+    margin-left:25%;
+    margin-top: 10%;
+    box{
+        object-fit: cover;
+        border-style: solid;
+        border-color: transparent;
+        display: inline-block;
+        margin: 0.5%;
+        img{
+            width: 300px;
+            height: 300px;
+            padding-left: 1%;
+            padding-right: 1%;
+        }
+        img:hover{
+            color:white;
+
+        }
+
+    }
+   
+}
+.footer{
+    color: red;
+}
+       
