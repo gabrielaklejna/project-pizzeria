@@ -1,26 +1,48 @@
 *, *::before, *::after{
     box-sizing: border-box;
   }
+
 .col-6{
+    margin-left: 24%;
+    margin-top: 30px;
+    width: 50%;
     img{ 
         width:400px; 
         height: 200px;
+        z-index: -1;
     }
-}
-span{
+    h2{ 
+        position: absolute;
+        top: 40%;
+        z-index: 0;
+    }
+    span{
     color: white;  
     text-align: center; 
     display: inline-block;
+    }
+    
 }
 
 .col-12{ 
     text-align: center;
     color: white;
     background: tomato; 
+    background-position: center; 
     height: 150px;
-    margin-left: -18%;
-    margin-right: -18%;
     padding-top: 5%;
+    width: 43%;
+    margin-left: 24%; 
+    h2{
+        position: absolute; 
+        top: 50%;
+        left: 40%; 
+    }
+    h3{
+        position: absolute; 
+        top: 54%;
+        left: 40%; 
+    }
 }
 .main-carousel{
     margin-left:26%;
@@ -43,29 +65,34 @@ span{
     justify-content: space-between;
     flex-wrap: wrap; 
     position: relative;
-    margin-left:25%;
+    margin-left:24%;
     margin-top: 10%;
-    box{
+    width: 100%;
+    .row{
+        display: flex;    
+    }
+    .box{
         object-fit: cover;
         border-style: solid;
         border-color: transparent;
         display: inline-block;
-        margin: 0.5%;
+    
         img{
             width: 300px;
             height: 300px;
             padding-left: 1%;
             padding-right: 1%;
         }
-        img:hover{
-            color:white;
-
+        img:after{
+            background-color: grey;
+            i{
+                z-index: 0;
+            }
         }
-
     }
-   
 }
 .footer{
     color: red;
+    margin-left: 30%;
 }
        

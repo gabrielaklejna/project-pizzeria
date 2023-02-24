@@ -27,10 +27,6 @@ class Booking{
           thisBooking.dom.hourPicker = thisBooking.dom.wrapper.querySelector(select.widgets.hourPicker.wrapper);
           thisBooking.dom.tables = thisBooking.dom.wrapper.querySelectorAll(select.booking.tables);
           thisBooking.dom.floorPlan = thisBooking.dom.wrapper.querySelector(select.booking.floorPlan);
-          thisBooking.dom.starters = thisBooking.dom.wrapper.querySelectorAll(select.booking.starters);
-          thisBooking.dom.phone = thisBooking.dom.wrapper.querySelector(select.booking.phone);
-          thisBooking.dom.address = thisBooking.dom.wrapper.querySelector(select.booking.address);
-
       }
       initWidgets(){
           const thisBooking = this;
@@ -50,12 +46,10 @@ class Booking{
             }
           });
           
-          thisBooking.dom.wrapper.addEventListener('submit', function (e){
+           thisBooking.dom.wrapper.addEventListener('submit', function (e){
             e.preventDefault();
             thisBooking.sendBooking();
-          });
-
-        
+      })
       }
 
       handleTableClick(table){
@@ -119,7 +113,6 @@ class Booking{
           .then(function([bookings, eventsCurrent, eventsRepeat]){
             thisBooking.parseData(bookings, eventsCurrent, eventsRepeat);
             });
-
       }
       parseData(bookings, eventsCurrent, eventsRepeat){
         const thisBooking = this; 
@@ -193,6 +186,9 @@ class Booking{
           else{
             table.classList.remove(classNames.booking.tableBooked);
           }
+
+
+          
         }
       }
       sendBooking() {
@@ -200,20 +196,18 @@ class Booking{
   
         const url = settings.db.url + '/' + settings.db.bookings; //http://localhost:3131/bookings
         const payload = {
-          date: thisBooking.datePicker.value,
-          hour: thisBooking.hourPicker.value,
-          table: thisBooking.tableSelected,
-          duration: thisBooking.hoursAmount.value,
-          ppl: thisBooking.peopleAmount.value,
-          starters: [],
-          phone: thisBooking.dom.phone.value,
-          address: thisBooking.dom.address.value,
+          "date": thisBooking.dom.datePicker,
+          "hour": thisBooking.dom.hourPicker,
+          "table": thisBooking.dom.tables.value,
+          "duration": thisBooking.dom.hoursAmount.value,
+          "ppl": thisBooking.dom.peopleAmount.value,
+          "starters": [],
+          "phone": thisBooking.dom.form.phone,
+          "address": thisBooking.dom.form.address,
         }
   
-        for(const starter of thisBooking.dom.starters) {
-          if (starter.checked === true){
-            payload.starters.push(starter.value);
-          }
+        for(const starter of payload.starters) {
+          payload.starters.push(starter.getData());
         }
   
         fetch(url, {
